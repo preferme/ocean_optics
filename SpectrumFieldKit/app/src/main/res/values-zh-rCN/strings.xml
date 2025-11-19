@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">光谱分析工具</string>
+    <string name="navigation_drawer_open">打开导航栏</string>
+    <string name="navigation_drawer_close">关闭导航栏</string>
+    <string name="nav_header_title">光谱分析工具</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">设置</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_apply">应用</string>
+    <string name="settings_dialog_title">设置变更提醒</string>
+    <string name="settings_dialog_message">设置信息已经变更，是否进行应用？</string>
+    <string name="settings_dialog_apply">应用</string>
+    <string name="settings_dialog_cancel">取消</string>
+
+</resources>
