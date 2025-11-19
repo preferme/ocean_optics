@@ -58,5 +58,4 @@ public class ReadCommand implements ICommand{
         return builder.toString();
     }
 
-
 }

@@ -10,7 +10,6 @@ public class ApplicationContext {
         return INSTANCE;
     }
 
-
     private Fragment currentFragment;
 
     public void setCurrentFragment(Fragment currentFragment) {
@@ -22,3 +21,4 @@ public class ApplicationContext {
     }
 
 }
+
