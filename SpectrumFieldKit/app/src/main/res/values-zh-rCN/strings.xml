@@ -17,5 +17,14 @@
     <string name="settings_dialog_message">设置信息已经变更，是否进行应用？</string>
     <string name="settings_dialog_apply">应用</string>
     <string name="settings_dialog_cancel">取消</string>
+    <string name="menu_bluetooth">蓝牙</string>
+    <string name="btn_enable_bluetooth">开启蓝牙</string>
+    <string name="btn_disable_bluetooth">关闭蓝牙</string>
+    <string name="btn_scan_devices">扫描</string>
+    <string name="fragment_bluetooth_enabled">蓝牙功能已开启。</string>
+    <string name="fragment_bluetooth_open_failed">蓝牙功能开启失败。</string>
+    <string name="fragment_bluetooth_disabled">蓝牙功能已关闭。</string>
+    <string name="fragment_bluetooth_close_failed">蓝牙功能关闭失败。</string>
+    <string name="fragment_bluetooth_not_support">该设备不支持蓝牙功能。</string>
 
 </resources>

@@ -17,5 +17,14 @@
     <string name="settings_dialog_message">The settings have been changed. Do you want to apply them?</string>
     <string name="settings_dialog_apply">Apply</string>
     <string name="settings_dialog_cancel">Cancel</string>
+    <string name="menu_bluetooth">Bluetooth</string>
+    <string name="btn_enable_bluetooth">Open BT</string>
+    <string name="btn_disable_bluetooth">Close BT</string>
+    <string name="btn_scan_devices">SCAN</string>
+    <string name="fragment_bluetooth_enabled">Bluetooth is enabled.</string>
+    <string name="fragment_bluetooth_open_failed">Bluetooth function failed to open.</string>
+    <string name="fragment_bluetooth_disabled">Bluetooth is disabled.</string>
+    <string name="fragment_bluetooth_close_failed">Bluetooth function failed to close.</string>
+    <string name="fragment_bluetooth_not_support">This device does not support Bluetooth.</string>
 
 </resources>

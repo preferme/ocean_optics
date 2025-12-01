@@ -1,7 +1,6 @@
 package houlei.andriod.sfk;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,11 +13,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -28,11 +24,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import houlei.andriod.sfk.databinding.ActivityMainBinding;
 import houlei.andriod.sfk.ui.settings.SettingsFragment;
-import houlei.andriod.sfk.utils.FragmentUtils;
 import houlei.andriod.sfk.utils.LanguageUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+        // 界面左上角 唤出菜单的按钮 设置
         mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_bluetooth,
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
@@ -82,14 +78,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-
+            // 调出设置界面的代码片段
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
             NavDestination currentDest = navController.getCurrentDestination();
             if (currentDest == null || currentDest.getId() != R.id.nav_settings) {
                 navController.navigate(R.id.nav_settings);
             }
-
-//            Toast.makeText(MainActivity.this, "选择的设置按钮", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -97,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
+        // 应用多国语言立即生效的代码片段
         Configuration configuration = newBase.getResources().getConfiguration();
         Locale locale = LanguageUtils.loadLanguage(newBase).getLocale();
         configuration.setLocale(locale);
@@ -108,29 +103,23 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         Fragment fragment = ApplicationContext.getInstance().getCurrentFragment();
-        Log.d("MyTag", "[MainActivity][onSupportNavigateUp] CurrentFragment: " + fragment);
+        // 设置界面中，点击左上角的退回按钮时，如果设置没有保存则弹窗进行提示
         if (fragment instanceof SettingsFragment && ((SettingsFragment)fragment).settingsChanged()) {
             Log.d("MyTag", "onSupportNavigateUp() Settings Changed");
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.settings_dialog_title).setMessage(R.string.settings_dialog_message)
-                    .setPositiveButton(R.string.settings_dialog_apply, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    ((SettingsFragment)fragment).clickApply();
-                    if(!NavigationUI.navigateUp(navController, mAppBarConfiguration)) {
-                        MainActivity.super.onSupportNavigateUp();
-                    }
-                }
-            }).setNegativeButton(R.string.settings_dialog_cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                    if(!NavigationUI.navigateUp(navController, mAppBarConfiguration)) {
-                        MainActivity.super.onSupportNavigateUp();
-                    }
-                }
-            }).create().show();
-            return false;
+                    .setPositiveButton(R.string.settings_dialog_apply, (dialog, which) -> {
+                        ((SettingsFragment)fragment).clickApply();
+                        if(!NavigationUI.navigateUp(navController, mAppBarConfiguration)) {
+                            MainActivity.super.onSupportNavigateUp();
+                        }
+                    }).setNegativeButton(R.string.settings_dialog_cancel, (dialog, which) -> {
+                        dialog.cancel();
+                        if(!NavigationUI.navigateUp(navController, mAppBarConfiguration)) {
+                            MainActivity.super.onSupportNavigateUp();
+                        }
+                    }).create().show();
+            return false; // 拦截回退操作
         }
 
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
